@@ -1,6 +1,6 @@
 package com.tugcetasyildiz.n11homework2;
 
-import com.tugcetasyildiz.n11homework2.generator.RealEstateGenerator;
+import com.tugcetasyildiz.n11homework2.generator.Property;
 import com.tugcetasyildiz.n11homework2.service.CottageService;
 import com.tugcetasyildiz.n11homework2.service.HouseService;
 import com.tugcetasyildiz.n11homework2.service.VillaService;
@@ -24,13 +24,13 @@ public class MockDataController {
     @GetMapping("price/average")
     public BigDecimal calculateAveragePrice(HouseType houseType) {
         if (houseType.equals(HouseType.HOUSE))
-            return houseService.calculateAveragePrice(RealEstateGenerator.HOUSE_LIST);
+            return houseService.calculateAveragePrice(Property.HOUSE_LIST);
 
         if (houseType.equals(HouseType.VILLA))
-            return villaService.calculateAveragePrice(RealEstateGenerator.VILLA_LIST);
+            return villaService.calculateAveragePrice(Property.VILLA_LIST);
 
         if (houseType.equals(HouseType.COTTAGE))
-            return cottageService.calculateAveragePrice(RealEstateGenerator.COTTAGE_LIST);
+            return cottageService.calculateAveragePrice(Property.COTTAGE_LIST);
 
         return BigDecimal.ZERO;
     }
@@ -38,13 +38,13 @@ public class MockDataController {
     @GetMapping("price/total")
     public BigDecimal calculateTotalPrice(HouseType houseType) {
         if (houseType.equals(HouseType.HOUSE))
-            return houseService.calculateTotalPrice(RealEstateGenerator.HOUSE_LIST);
+            return houseService.calculateTotalPrice(Property.HOUSE_LIST);
 
         if (houseType.equals(HouseType.VILLA))
-            return villaService.calculateTotalPrice(RealEstateGenerator.VILLA_LIST);
+            return villaService.calculateTotalPrice(Property.VILLA_LIST);
 
         if (houseType.equals(HouseType.COTTAGE))
-            return cottageService.calculateTotalPrice(RealEstateGenerator.COTTAGE_LIST);
+            return cottageService.calculateTotalPrice(Property.COTTAGE_LIST);
 
         return BigDecimal.ZERO;
     }
@@ -52,13 +52,13 @@ public class MockDataController {
     @GetMapping("area/average")
     public double calculateAverageArea(HouseType houseType) {
         if (houseType.equals(HouseType.HOUSE))
-            return houseService.calculateAverageArea(RealEstateGenerator.HOUSE_LIST);
+            return houseService.calculateAverageArea(Property.HOUSE_LIST);
 
         if (houseType.equals(HouseType.VILLA))
-            return villaService.calculateAverageArea(RealEstateGenerator.VILLA_LIST);
+            return villaService.calculateAverageArea(Property.VILLA_LIST);
 
         if (houseType.equals(HouseType.COTTAGE))
-            return cottageService.calculateAverageArea(RealEstateGenerator.COTTAGE_LIST);
+            return cottageService.calculateAverageArea(Property.COTTAGE_LIST);
 
         return 0.0;
     }

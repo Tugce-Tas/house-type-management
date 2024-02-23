@@ -33,58 +33,58 @@ public abstract class BaseService<E extends BaseEntity,
     }
 
     public DTO update(Long id, R request) {
-        var realEstate = getRepository().findById(id).orElse(null);
+        var entity = getRepository().findById(id).orElse(null);
 
-        if (Objects.isNull(realEstate))
+        if (Objects.isNull(entity))
             return null;
 
-        realEstate.setRoomCount(request.getRoomCount());
-        realEstate.setLivingRoomCount(request.getLivingRoomCount());
-        realEstate.setArea(request.getArea());
-        realEstate.setPrice(request.getPrice());
-        getRepository().save(realEstate);
+        entity.setRoomCount(request.getRoomCount());
+        entity.setLivingRoomCount(request.getLivingRoomCount());
+        entity.setArea(request.getArea());
+        entity.setPrice(request.getPrice());
+        getRepository().save(entity);
 
-        return getMapper().convertToDTO(realEstate);
+        return getMapper().convertToDTO(entity);
     }
 
     public void delete(Long id) {
-        var realEstate = getRepository().findById(id).orElse(null);
-        if (Objects.nonNull(realEstate)) {
-            getRepository().delete(realEstate);
+        var entity = getRepository().findById(id).orElse(null);
+        if (Objects.nonNull(entity)) {
+            getRepository().delete(entity);
         }
     }
 
-    public double calculateAverageArea(List<E> realEstateList) {
+    public double calculateAverageArea(List<E> entityList) {
         double totalArea = 0.0;
 
-        if (CollectionUtils.isEmpty(realEstateList)) {
+        if (CollectionUtils.isEmpty(entityList)) {
             return totalArea;
         }
-        for (E entity : realEstateList) {
+        for (E entity : entityList) {
             totalArea += entity.getArea();
         }
 
-        return totalArea / realEstateList.size();
+        return totalArea / entityList.size();
     }
 
-    public BigDecimal calculateTotalPrice(List<E> realEstateList) {
+    public BigDecimal calculateTotalPrice(List<E> entityList) {
         BigDecimal totalPrice = BigDecimal.ZERO;
 
-        if (CollectionUtils.isEmpty(realEstateList)) {
+        if (CollectionUtils.isEmpty(entityList)) {
             return BigDecimal.ZERO;
         }
-        for (E entity : realEstateList) {
+        for (E entity : entityList) {
             totalPrice = totalPrice.add(entity.getPrice());
         }
         return totalPrice;
     }
 
-    public BigDecimal calculateAveragePrice(List<E> realEstateList) {
-        if (realEstateList.isEmpty()) {
+    public BigDecimal calculateAveragePrice(List<E> entityList) {
+        if (entityList.isEmpty()) {
             return BigDecimal.ZERO;
         }
-        BigDecimal totalPrice = calculateTotalPrice(realEstateList);
-        return totalPrice.divide(BigDecimal.valueOf(realEstateList.size()), 2, RoundingMode.HALF_UP);
+        BigDecimal totalPrice = calculateTotalPrice(entityList);
+        return totalPrice.divide(BigDecimal.valueOf(entityList.size()), 2, RoundingMode.HALF_UP);
     }
 
     public List<E> filterHousesByRoomAndLivingRoom(List<E> entityList, int roomCount, int livingRoomCount) {

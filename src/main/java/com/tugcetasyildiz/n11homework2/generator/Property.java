@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class RealEstateGenerator {
+public class Property {
     public static final List<House> HOUSE_LIST = new ArrayList<>();
 
     public static final List<Cottage> COTTAGE_LIST = new ArrayList<>();
