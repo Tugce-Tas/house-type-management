@@ -87,11 +87,11 @@ public abstract class BaseService<E extends BaseEntity,
         return totalPrice.divide(BigDecimal.valueOf(entityList.size()), 2, RoundingMode.HALF_UP);
     }
 
-    public List<E> filterHousesByRoomAndLivingRoom(List<E> entityList, int roomCount, int livingRoomCount) {
+    public List<E> filterPropertyByRoomAndLivingRoom(List<E> entityList, int roomCount, int livingRoomCount) {
 
         return entityList.stream()
-                .filter(house -> house.getLivingRoomCount() == livingRoomCount)
-                .filter(house -> house.getRoomCount() == roomCount)
+                .filter(entity -> entity.getLivingRoomCount() == livingRoomCount)
+                .filter(entity -> entity.getRoomCount() == roomCount)
                 .toList();
     }
 }

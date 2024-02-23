@@ -1,5 +1,6 @@
 package com.tugcetasyildiz.n11homework2;
 
+import com.tugcetasyildiz.n11homework2.general.baseEntity.BaseEntity;
 import com.tugcetasyildiz.n11homework2.generator.Property;
 import com.tugcetasyildiz.n11homework2.service.CottageService;
 import com.tugcetasyildiz.n11homework2.service.HouseService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 enum HouseType {HOUSE, VILLA, COTTAGE}
 
@@ -61,6 +63,20 @@ public class MockDataController {
             return cottageService.calculateAverageArea(Property.COTTAGE_LIST);
 
         return 0.0;
+    }
+
+    @GetMapping("filter/room-count")
+    public List<? extends BaseEntity> filterPropertyByRoomAndLivingRoom(HouseType houseType, int roomCount, int livingRoomCount) {
+        if (houseType.equals(HouseType.HOUSE))
+            return houseService.filterPropertyByRoomAndLivingRoom(Property.HOUSE_LIST, roomCount, livingRoomCount);
+
+        if (houseType.equals(HouseType.VILLA))
+            return villaService.filterPropertyByRoomAndLivingRoom(Property.VILLA_LIST, roomCount, livingRoomCount);
+
+        if (houseType.equals(HouseType.COTTAGE))
+            return cottageService.filterPropertyByRoomAndLivingRoom(Property.COTTAGE_LIST, roomCount, livingRoomCount);
+
+        return null;
     }
 
 }
